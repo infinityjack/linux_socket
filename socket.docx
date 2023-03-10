@@ -13,6 +13,7 @@
 
         e.g.: 
             int sockfd = socket(AF_INET, SOCK_STREAM, 0);
+            fd stands for file descriptor.
 
 /*bind the socket to a port*/
 int bind(int sockfd, const struct sockaddr* addr, socklen_t addrlen);
