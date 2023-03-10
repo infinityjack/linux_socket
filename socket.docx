@@ -1,0 +1,103 @@
+/*create a socket*/
+    int socket(int domain, int type, int protocol);
+    
+        domain:
+            AF_INET(ipv4)
+
+        type:
+            SOCK_STREAM(TCP(transport control protocol)) or 
+                SOCK_DGRAM(UDP(user diagram protocol))
+
+        protocol: 
+            default is 0
+
+        e.g.: 
+            int sockfd = socket(AF_INET, SOCK_STREAM, 0);
+            fd stands for file descriptor.
+
+/*bind the socket to a port*/
+int bind(int sockfd, const struct sockaddr* addr, socklen_t addrlen);
+
+    struct sockaddr
+    {
+        sa_family_t sa_family;
+        char sa_data[14];
+    };
+
+    struct sockaddr_in
+    {
+        short int sin_family;//addr family
+        unsigned short int sin_port;//port number
+        struct in_addr sin_addr;//internet addr
+        unsigned char sin_zero[8];//padding
+    };
+    
+    sin: 
+        abbr for socket address in.
+
+
+    return : 
+        0 if success, -1 if failure
+
+/*listen for connection requests*/
+int listen(int sockfd, int backlog);
+
+    backlog:
+        set up a max queue which can be solved by the server.
+        the number of items can be accepted and connect with server.
+
+/*accept connection request*/
+int accept(int sockfd, struct sockaddr* addr, socklen_t* addrlen);
+or:
+    based on above:
+        newsockfd = accept(sockfd, (struct sockaddr*) &addr, &addrlen);
+
+
+/*connect, attempt to establish a connection*/
+int connect(int sockfd, struct sockaddr* serv_addr, socklen_t addrlen);
+
+    return:
+        0 if success
+        -1 if failure
+
+/*read buffer data*/
+int read(newsockfd, buffer, buffer_size);
+
+/*write data*/
+int write(newsockfd, buffer, buffer_size)
+
+
+
+useful struct:
+    struct hostent
+    {
+        char* h_name;//host name
+        char** h_aliases;//pointer to array of aliases
+        int h_addrtype;//addr type
+        int h_length;//addr len
+        char** h_addr_list;//pointer to array of pointer to addr
+    };
+
+    struct sockaddr
+    {
+        unsigned short sa_family;//addr family
+        char sa_data[14];//implement-defined padding
+    };
+
+    struct sockaddr_stoeage
+    {
+        unsigned short ss_family;
+        char __ss_padding[6];
+        __int64_t __ss_align;
+    };
+
+
+
+
+
+
+
+
+
+
+
